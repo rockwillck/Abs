@@ -3,14 +3,12 @@ const ctx = canvas.getContext("2d")
 canvas.width = 1024
 canvas.height = 1024
 
-line = Math.random()*canvas.width/2
-
 xPack = 6
-periods = []
-for (i=0;i<xPack;i++) { 
-    periods.push(Math.random() * canvas.height)
+function changeNum(num) {
+    xPack = num
+    document.getElementById("xPack").innerText = xPack
+    draw()
 }
-periods = periods.sort((a, b) => a - b)
 
 function getCurvePoints(pts, tension, isClosed, numOfSegments) {
 
@@ -114,32 +112,14 @@ function renderAb(points) {
 }
 
 function draw() {
-    // ctx.beginPath()
-    // ctx.moveTo(line, 0)
-    // ctx.lineTo(line, canvas.height)
-    // ctx.closePath()
-    // ctx.stroke()
+    periods = []
+    for (i=0;i<xPack;i++) { 
+        periods.push(Math.random() * canvas.height)
+    }
+    periods = periods.sort((a, b) => a - b)
 
-    // ctx.beginPath()
-    // ctx.moveTo(canvas.width - line, 0)
-    // ctx.lineTo(canvas.width - line, canvas.height)
-    // ctx.closePath()
-    // ctx.stroke()
-
-    // ctx.beginPath()
-    // ctx.moveTo(canvas.width/2, 0)
-    // ctx.lineTo(canvas.width/2, canvas.height)
-    // ctx.closePath()
-    // ctx.stroke()
-
-    // for (period of periods) {
-    //     ctx.beginPath()
-    //     ctx.moveTo(0, period)
-    //     ctx.lineTo(canvas.width, period)
-    //     ctx.closePath()
-    //     ctx.stroke()
-    // }
-
+    line = Math.random()*canvas.width/2
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
     for (abIndex=0;abIndex<xPack;abIndex+=2) {
         period1 = periods[abIndex]
         period2 = periods[abIndex+1]
@@ -168,25 +148,6 @@ function draw() {
             {x:canvas.width/2 + 50, y:period1}
         ]
         )
-        // ctx.beginPath()
-        // ctx.moveTo(0, period1)
-        // ctx.lineTo(line, period2)
-        // ctx.lineTo(canvas.width/2, period1)
-        // ctx.lineTo(canvas.width/2, period2)
-        // ctx.lineTo(line, period3)
-        // ctx.lineTo(0, period2)
-        // ctx.closePath()
-        // ctx.fill()
-
-        // ctx.beginPath()
-        // ctx.moveTo(canvas.width/2, period1)
-        // ctx.lineTo(canvas.width - line, period2)
-        // ctx.lineTo(canvas.width, period1)
-        // ctx.lineTo(canvas.width, period2)
-        // ctx.lineTo(canvas.width - line, period3)
-        // ctx.lineTo(canvas.width/2, period2)
-        // ctx.closePath()
-        // ctx.fill()
     }
 }
 draw()
